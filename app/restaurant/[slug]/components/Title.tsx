@@ -1,9 +1,7 @@
-import Link from 'next/link';
-export default function Title() {
+export default function Title({ name }: { name: string }) {
   return (
-    <nav className="flex text-reg border-b pb-2">
-      <Link href="/restaurant/milestone-grill" className="mr-7">Overview</Link>
-      <Link href="/restaurant/milestone-grill/menu" className="mr-7">Menu</Link>
-    </nav>
+    <div className="mt-4 border-b pb-6">
+      <h1 className="font-bold text-6xl">{name}</h1>
+    </div>
   );
 }
