@@ -12,8 +12,9 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   //   await prisma.table.deleteMany();
-  // await prisma.review.deleteMany();
+  await prisma.review.deleteMany();
   await prisma.item.deleteMany();
+  await prisma.image.deleteMany();
   await prisma.restaurant.deleteMany();
   await prisma.location.deleteMany();
   await prisma.cuisine.deleteMany();
@@ -44,477 +45,772 @@ export default async function handler(
   const niagaraLocationId =
     locations.find((location) => location.name === "niagara")?.id || 1;
 
-  await prisma.restaurant.createMany({
-    data: [
-      // INDIAN //
-      {
-        name: "Vivaan - fine Indian",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/1/32109459.jpg",
-        price: PRICE.REGULAR,
-        description:
-          "Vivaan is Modern Indian Cuisine serving dishes from different regions of India. We carefully select our ingredients and use them to make authentic Indian recipes and our chef puts his modern flair and twists to the dishes.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/32109461.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/32459786.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/32484701.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/32484708.jpg",
+  // INDIAN //
+  await prisma.restaurant.create({
+    data: {
+      name: "Vivaan - fine Indian",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/1/32109459.jpg",
+      price: PRICE.REGULAR,
+      description:
+        "Vivaan is Modern Indian Cuisine serving dishes from different regions of India. We carefully select our ingredients and use them to make authentic Indian recipes and our chef puts his modern flair and twists to the dishes.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/32109461.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/32459786.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/32484701.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/32484708.jpg",
+          },
         ],
-        open_time: "14:30:00.000Z",
-        close_time: "21:30:00.000Z",
-        slug: "vivaan-fine-indian-cuisine-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: indianCuisineId,
       },
-      {
-        name: "RamaKrishna Indian",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/2/47417441.jpg",
-        price: PRICE.CHEAP,
-        description:
-          "With 20 years of experience cooking in the finest restaurants, our chef is excited to present their vision to you and all our guests. Our caring and committed staff will ensure you have a fantastic experience with us.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47417455.png",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/47417456.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47417457.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/47417458.jpg",
+      open_time: "14:30:00.000Z",
+      close_time: "21:30:00.000Z",
+      slug: "vivaan-fine-indian-cuisine-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: indianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "RamaKrishna Indian",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/2/47417441.jpg",
+      price: PRICE.CHEAP,
+      description:
+        "With 20 years of experience cooking in the finest restaurants, our chef is excited to present their vision to you and all our guests. Our caring and committed staff will ensure you have a fantastic experience with us.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47417455.png",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/47417456.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47417457.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/47417458.jpg",
+          },
         ],
-        open_time: "12:30:00.000Z",
-        close_time: "22:00:00.000Z",
-        slug: "ramakrishna-indian-restaurant-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: indianCuisineId,
       },
-      {
-        name: "Coconut Lagoon",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/48545745.jpg",
-        price: PRICE.EXPENSIVE,
-        description:
-          "At Coconut Lagoon prepare yourselves for a most memorable journey through South Indian cuisine and feast on high quality food of inimitable flavour, aroma and originality in the vibrant setting of Coconut Lagoon.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/30045353.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48545766.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/30045356.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/49399187.jpg",
+      open_time: "12:30:00.000Z",
+      close_time: "22:00:00.000Z",
+      slug: "ramakrishna-indian-restaurant-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: indianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Coconut Lagoon",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/48545745.jpg",
+      price: PRICE.EXPENSIVE,
+      description:
+        "At Coconut Lagoon prepare yourselves for a most memorable journey through South Indian cuisine and feast on high quality food of inimitable flavour, aroma and originality in the vibrant setting of Coconut Lagoon.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/30045353.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48545766.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/30045356.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/49399187.jpg",
+          },
         ],
-        open_time: "17:30:00.000Z",
-        close_time: "22:00:00.000Z",
-        slug: "coconut-lagoon-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: indianCuisineId,
       },
-      {
-        name: "Last Train to Delhi",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/26429498.jpg",
-        price: PRICE.REGULAR,
-        description:
-          "Welcome to Last Train to Delhi. We are a progressive Indian restaurant in the beautiful Glebe community in Ottawa. Our speciality is Northern Indian food, classics like Murg Mahkini and some modern dishes like Crispy Shrimp. We are a small cozy restaurant, so make sure that you reserve through OpenTable.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/29477326.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/29777084.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/32104059.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/32104066.jpg",
+      open_time: "17:30:00.000Z",
+      close_time: "22:00:00.000Z",
+      slug: "coconut-lagoon-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: indianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Last Train to Delhi",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/26429498.jpg",
+      price: PRICE.REGULAR,
+      description:
+        "Welcome to Last Train to Delhi. We are a progressive Indian restaurant in the beautiful Glebe community in Ottawa. Our speciality is Northern Indian food, classics like Murg Mahkini and some modern dishes like Crispy Shrimp. We are a small cozy restaurant, so make sure that you reserve through OpenTable.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/29477326.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/29777084.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/32104059.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/32104066.jpg",
+          },
         ],
-        open_time: "10:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "last-train-to-delhi-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: indianCuisineId,
       },
-      {
-        name: "Adrak Yorkville",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/4/47914200.jpg",
-        price: PRICE.EXPENSIVE,
-        description:
-          "Namaste and welcome to Adrak - a place where food unites all. We take you through a journey of the past and present, as we hope to encourage thought-provoking conversations amid elevated Indian food.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/3/47914185.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/3/47914186.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/47980632.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/47980634.jpg",
+      open_time: "10:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "last-train-to-delhi-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: indianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Adrak Yorkville",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/4/47914200.jpg",
+      price: PRICE.EXPENSIVE,
+      description:
+        "Namaste and welcome to Adrak - a place where food unites all. We take you through a journey of the past and present, as we hope to encourage thought-provoking conversations amid elevated Indian food.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/3/47914185.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/3/47914186.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/47980632.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/47980634.jpg",
+          },
         ],
-        open_time: "16:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "adrak-yorkville-toronto",
-        location_id: torontoLocationId,
-        cuisine_id: indianCuisineId,
       },
-      {
-        name: "Curryish Tavern",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/49294128.jpg",
-        price: PRICE.REGULAR,
-        description:
-          "The most unique Indian food in the world! We are inspired by the seasons of Ontario and the cooking techniques of the world. Regale in the imagination of Chef Miheer Shete's dishes and change your palate for life.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48765139.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48765149.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48765157.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48765162.jpg",
+      open_time: "16:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "adrak-yorkville-toronto",
+      location: {
+        connect: { id: torontoLocationId },
+      },
+      cuisine: {
+        connect: { id: indianCuisineId },
+      },
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Curryish Tavern",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/49294128.jpg",
+      price: PRICE.REGULAR,
+      description:
+        "The most unique Indian food in the world! We are inspired by the seasons of Ontario and the cooking techniques of the world. Regale in the imagination of Chef Miheer Shete's dishes and change your palate for life.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48765139.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48765149.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48765157.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48765162.jpg",
+          },
         ],
-        open_time: "10:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "curryish-tavern-toronto",
-        location_id: torontoLocationId,
-        cuisine_id: indianCuisineId,
       },
-      {
-        name: "Utsav",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/26646742.jpg",
-        price: PRICE.CHEAP,
-        description:
-          "Utsav is an ancient Sanskrit word meaning festival. An integral part of Indian culture, Indian festivals are innumerable and equally varied in origin from the Himalayan foothills to the Peninsula's tip and food plays a very prominent part of the festive events.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/26646742.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/26646761.jpg",
+      open_time: "10:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "curryish-tavern-toronto",
+      location_id: torontoLocationId,
+      cuisine_id: indianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Utsav",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/xlarge/1/26646742.jpg",
+      price: PRICE.CHEAP,
+      description:
+        "Utsav is an ancient Sanskrit word meaning festival. An integral part of Indian culture, Indian festivals are innumerable and equally varied in origin from the Himalayan foothills to the Peninsula's tip and food plays a very prominent part of the festive events.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/26646742.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/26646761.jpg",
+          },
         ],
-        open_time: "14:00:00.000Z",
-        close_time: "19:00:00.000Z",
-        slug: "utsav-toronto",
-        location_id: torontoLocationId,
-        cuisine_id: indianCuisineId,
       },
-      {
-        name: "Pukka",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/1/25733300.jpg",
-        price: PRICE.EXPENSIVE,
-        description:
-          "At this refined, yet casual, Indian restaurant, the portions are large, the wine list is top-notch, and the ambience encourages sharing.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25733294.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25733295.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25733296.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25733297.jpg",
+      open_time: "14:00:00.000Z",
+      close_time: "19:00:00.000Z",
+      slug: "utsav-toronto",
+      location_id: torontoLocationId,
+      cuisine_id: indianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Pukka",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/1/25733300.jpg",
+      price: PRICE.EXPENSIVE,
+      description:
+        "At this refined, yet casual, Indian restaurant, the portions are large, the wine list is top-notch, and the ambience encourages sharing.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25733294.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25733295.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25733296.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25733297.jpg",
+          },
         ],
-        open_time: "12:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "pukka-niagara",
-        location_id: niagaraLocationId,
-        cuisine_id: indianCuisineId,
       },
-      {
-        name: "Kamasutra Indian",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25602522.jpg",
-        price: PRICE.CHEAP,
-        description:
-          "This elegant fine dining Indian Restaurant has been satisfying the Indian tandoori and curry cravings for 12 years in Toronto.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/3/31854185.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/3/31854188.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/25684161.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/26009011.jpg",
+      open_time: "12:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "pukka-niagara",
+      location_id: niagaraLocationId,
+      cuisine_id: indianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Kamasutra Indian",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/xlarge/1/25602522.jpg",
+      price: PRICE.CHEAP,
+      description:
+        "This elegant fine dining Indian Restaurant has been satisfying the Indian tandoori and curry cravings for 12 years in Toronto.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/3/31854185.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/3/31854188.jpg",
+          },
+          { url: "https://resizer.otstatic.com/v2/photos/xlarge/25684161.jpg" },
+          { url: "https://resizer.otstatic.com/v2/photos/xlarge/26009011.jpg" },
         ],
-        open_time: "10:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "kamasutra-indian-restaurant-and-wine-bar-niagara",
-        location_id: niagaraLocationId,
-        cuisine_id: indianCuisineId,
       },
-      // MEXICAN //
-      {
-        name: "Eldorado Taco",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/2/42557297.jpg",
-        price: PRICE.REGULAR,
-        description:
-          "Eldorado Taco restaurant is excited to serve you traditional Mexican cuisine, re-imagined with a distinct modern flair, in a stylish setting on Preston street. Striving to bring you some of Ottawa’s best Tacos, margaritas and Tequila. Reserve your table now!",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/29501707.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/29501713.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/3/29501715.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/42557295.jpg",
+      open_time: "10:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "kamasutra-indian-restaurant-and-wine-bar-niagara",
+      location_id: niagaraLocationId,
+      cuisine_id: indianCuisineId,
+    },
+  });
+  // MEXICAN //
+  await prisma.restaurant.create({
+    data: {
+      name: "Eldorado Taco",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/2/42557297.jpg",
+      price: PRICE.REGULAR,
+      description:
+        "Eldorado Taco restaurant is excited to serve you traditional Mexican cuisine, re-imagined with a distinct modern flair, in a stylish setting on Preston street. Striving to bring you some of Ottawa’s best Tacos, margaritas and Tequila. Reserve your table now!",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/29501707.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/29501713.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/3/29501715.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/42557295.jpg",
+          },
         ],
-        open_time: "16:00:00.000Z",
-        close_time: "19:00:00.000Z",
-        slug: "eldorado-taco-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: mexicanCuisineId,
       },
-      {
-        name: "La Bartola",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/2/48981502.jpg",
-        price: PRICE.EXPENSIVE,
-        description:
-          "At La Bartola, we inspire a passion for authentic Mexican flavours. We use simple, fresh, and high-quality local & Mexican ingredients to craft delicious and thoughtful food.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48981480.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48981483.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48981485.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48981487.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48981490.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48981492.jpg",
+      open_time: "16:00:00.000Z",
+      close_time: "19:00:00.000Z",
+      slug: "eldorado-taco-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: mexicanCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "La Bartola",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/2/48981502.jpg",
+      price: PRICE.EXPENSIVE,
+      description:
+        "At La Bartola, we inspire a passion for authentic Mexican flavours. We use simple, fresh, and high-quality local & Mexican ingredients to craft delicious and thoughtful food.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48981480.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48981483.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48981485.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48981487.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48981490.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48981492.jpg",
+          },
         ],
-        open_time: "12:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "la-bartola-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: mexicanCuisineId,
       },
-      {
-        name: "El Catrin",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/2/28028883.png",
-        price: PRICE.CHEAP,
-        description:
-          "Reservations are booked for indoors only. Seating time will be limited to two hours maximum.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25770621.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25770622.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25770624.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25770625.jpg",
+      open_time: "12:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "la-bartola-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: mexicanCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "El Catrin",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/2/28028883.png",
+      price: PRICE.CHEAP,
+      description:
+        "Reservations are booked for indoors only. Seating time will be limited to two hours maximum.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25770621.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25770622.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25770624.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25770625.jpg",
+          },
         ],
-        open_time: "09:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "el-catrin-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: mexicanCuisineId,
       },
-      {
-        name: "3 Mariachis",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/2/32449465.jpg",
-        price: PRICE.CHEAP,
-        description:
-          "Specializing in the preparation of high quality Mexican food. Our vibrant décor, carefully selected menu, great staff and exciting entertainment will ensure that you are treated to a unique dining experience.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/32490939.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/32490987.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/32507838.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/41724689.jpg",
+      open_time: "09:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "el-catrin-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: mexicanCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "3 Mariachis",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/2/32449465.jpg",
+      price: PRICE.CHEAP,
+      description:
+        "Specializing in the preparation of high quality Mexican food. Our vibrant décor, carefully selected menu, great staff and exciting entertainment will ensure that you are treated to a unique dining experience.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/32490939.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/32490987.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/32507838.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/41724689.jpg",
+          },
         ],
-        open_time: "09:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "el-catrin-toronto",
-        location_id: torontoLocationId,
-        cuisine_id: mexicanCuisineId,
       },
-      {
-        name: "Casa Madera",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/47744844.jpg",
-        price: PRICE.EXPENSIVE,
-        description:
-          "The first location in Canada, from famed restauranteurs Noble 33, welcomes patrons into an immersive dining experience.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47745080.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47745081.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47745093.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47745097.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47745144.jpg",
+      open_time: "09:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "el-catrin-toronto",
+      location_id: torontoLocationId,
+      cuisine_id: mexicanCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Casa Madera",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/47744844.jpg",
+      price: PRICE.EXPENSIVE,
+      description:
+        "The first location in Canada, from famed restauranteurs Noble 33, welcomes patrons into an immersive dining experience.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47745080.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47745081.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47745093.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47745097.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47745144.jpg",
+          },
         ],
-        open_time: "15:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "casa-madera-toronto",
-        location_id: torontoLocationId,
-        cuisine_id: mexicanCuisineId,
       },
-      {
-        name: "Taco N Tequila",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/47429858.jpg",
-        price: PRICE.CHEAP,
-        description:
-          "As a family owned business, our goal is simple: to consistently deliver fresh and delicious Mexican flavours in a FUN and friendly atmosphere with the best service around!",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47600418.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47429797.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47429802.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47745097.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/47429814.jpg",
+      open_time: "15:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "casa-madera-toronto",
+      location_id: torontoLocationId,
+      cuisine_id: mexicanCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Taco N Tequila",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/47429858.jpg",
+      price: PRICE.CHEAP,
+      description:
+        "As a family owned business, our goal is simple: to consistently deliver fresh and delicious Mexican flavours in a FUN and friendly atmosphere with the best service around!",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47600418.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47429797.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47429802.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47745097.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/47429814.jpg",
+          },
         ],
-        open_time: "10:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "casa-madera-niagara",
-        location_id: niagaraLocationId,
-        cuisine_id: mexicanCuisineId,
       },
-      {
-        name: "El Jefe",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/47710768.jpg",
-        price: PRICE.CHEAP,
-        description:
-          "Lively cantina serving Mexican favorites & potent margaritas in a vibrant, airy space with murals.",
-        images: [],
-        open_time: "10:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "el-jefe-niagara",
-        location_id: niagaraLocationId,
-        cuisine_id: mexicanCuisineId,
+      open_time: "10:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "casa-madera-niagara",
+      location_id: niagaraLocationId,
+      cuisine_id: mexicanCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "El Jefe",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/47710768.jpg",
+      price: PRICE.CHEAP,
+      description:
+        "Lively cantina serving Mexican favorites & potent margaritas in a vibrant, airy space with murals.",
+      images: {
+        create: [],
       },
-      // ITALIAN //
-      {
-        name: "Cano Restaurant",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/2/43463549.jpg",
-        price: PRICE.REGULAR,
-        description:
-          "Our back patio has now officially reopened for FOOD SERVICE only. Drinks can be ordered and consumed at the bar before, during, or after dinner service.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/43463554.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/43463742.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/43463745.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/43463748.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/43463750.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/43463751.jpg",
+      open_time: "10:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "el-jefe-niagara",
+      location_id: niagaraLocationId,
+      cuisine_id: mexicanCuisineId,
+    },
+  });
+
+  // ITALIAN //
+  await prisma.restaurant.create({
+    data: {
+      name: "Cano Restaurant",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/2/43463549.jpg",
+      price: PRICE.REGULAR,
+      description:
+        "Our back patio has now officially reopened for FOOD SERVICE only. Drinks can be ordered and consumed at the bar before, during, or after dinner service!",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/43463554.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/43463742.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/43463745.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/43463748.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/43463750.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/43463751.jpg",
+          },
         ],
-        open_time: "13:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "cano-restaurant-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: italianCuisineId,
       },
-      {
-        name: "Blu Ristorante",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/2/47350167.jpg",
-        price: PRICE.EXPENSIVE,
-        description:
-          "Victorian Building with two floors of dining space and large side and front patio. Tastefully designed to host your special event, romantic dinner, corporate buyout or a celebration of any sort.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25305566.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25305567.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25305568.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25305569.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25305570.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/30091570.jpg",
+      open_time: "13:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "cano-restaurant-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: italianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Blu Ristorante",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/2/47350167.jpg",
+      price: PRICE.EXPENSIVE,
+      description:
+        "Victorian Building with two floors of dining space and large side and front patio. Tastefully designed to host your special event, romantic dinner, corporate buyout or a celebration of any sort.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25305566.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25305567.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25305568.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25305569.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/25305570.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/30091570.jpg",
+          },
         ],
-        open_time: "15:00:00.000Z",
-        close_time: "22:00:00.000Z",
-        slug: "blu-ristorante-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: italianCuisineId,
       },
-      {
-        name: "Stelvio",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/50557365.jpg",
-        price: PRICE.REGULAR,
-        description:
-          "Stelvio on Dundas West is an authentic Italian restaurant serving classic old world fare using traditional recipes and ingredients. Recipes have been fine-tuned to satisfy the palate of the modern guest, and fresh meals are prepared daily.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/3/26374971.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/26374974.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/26374975.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/26374976.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/50557389.jpg",
+      open_time: "15:00:00.000Z",
+      close_time: "22:00:00.000Z",
+      slug: "blu-ristorante-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: italianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Stelvio",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/50557365.jpg",
+      price: PRICE.REGULAR,
+      description:
+        "Stelvio on Dundas West is an authentic Italian restaurant serving classic old world fare using traditional recipes and ingredients. Recipes have been fine-tuned to satisfy the palate of the modern guest, and fresh meals are prepared daily.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/3/26374971.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/26374974.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/26374975.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/26374976.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/50557389.jpg",
+          },
         ],
-        open_time: "13:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "stelvio-ottawa",
-        location_id: ottawaLocationId,
-        cuisine_id: italianCuisineId,
       },
-      {
-        name: "Terroni Adelaide",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/46827195.jpg",
-        price: PRICE.REGULAR,
-        description:
-          "Terroni Adelaide’s multi-level location is located in Toronto’s historic York County Court House circa 1853.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/42309468.png",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/42309469.png",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/42309470.png",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/42309472.png",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/42309474.png",
+      open_time: "13:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "stelvio-ottawa",
+      location_id: ottawaLocationId,
+      cuisine_id: italianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Terroni Adelaide",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/46827195.jpg",
+      price: PRICE.REGULAR,
+      description:
+        "Terroni Adelaide’s multi-level location is located in Toronto’s historic York County Court House circa 1853.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/42309468.png",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/42309469.png",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/42309470.png",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/42309472.png",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/42309474.png",
+          },
         ],
-        open_time: "12:00:00.000Z",
-        close_time: "18:00:00.000Z",
-        slug: "terroni-adelaide-niagara",
-        location_id: niagaraLocationId,
-        cuisine_id: italianCuisineId,
       },
-      {
-        name: "EST Restaurant",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/49169798.jpg",
-        price: PRICE.CHEAP,
-        description:
-          "ēst is a modern, newly reopened restaurant serving Italian-French courses, captivating cocktails and wine.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/49253937.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/49253940.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/49253941.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/49415599.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/49415604.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/49696221.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/49999039.jpg",
+      open_time: "12:00:00.000Z",
+      close_time: "18:00:00.000Z",
+      slug: "terroni-adelaide-niagara",
+      location_id: niagaraLocationId,
+      cuisine_id: italianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "EST Restaurant",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/49169798.jpg",
+      price: PRICE.CHEAP,
+      description:
+        "ēst is a modern, newly reopened restaurant serving Italian-French courses, captivating cocktails and wine.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/49253937.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/49253940.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/49253941.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/49415599.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/49415604.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/49696221.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/1/49999039.jpg",
+          },
         ],
-        open_time: "09:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "est-restaurant-niagara",
-        location_id: niagaraLocationId,
-        cuisine_id: italianCuisineId,
       },
-      {
-        name: "Sofia",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/25558850.jpg",
-        price: PRICE.EXPENSIVE,
-        description:
-          "Tapping into true Italian tastes, the menu starts with a selection of antipasti including a citrus salad and grilled octopus, and a plentiful selection of crudo. ",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/25629442.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/25636273.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/25679656.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/25825772.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/26011606.jpg",
+      open_time: "09:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "est-restaurant-niagara",
+      location_id: niagaraLocationId,
+      cuisine_id: italianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Sofia",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/xlarge/1/25558850.jpg",
+      price: PRICE.EXPENSIVE,
+      description:
+        "Tapping into true Italian tastes, the menu starts with a selection of antipasti including a citrus salad and grilled octopus, and a plentiful selection of crudo.",
+      images: {
+        create: [
+          { url: "https://resizer.otstatic.com/v2/photos/xlarge/25629442.jpg" },
+          { url: "https://resizer.otstatic.com/v2/photos/xlarge/25636273.jpg" },
+          { url: "https://resizer.otstatic.com/v2/photos/xlarge/25679656.jpg" },
+          { url: "https://resizer.otstatic.com/v2/photos/xlarge/25825772.jpg" },
+          { url: "https://resizer.otstatic.com/v2/photos/xlarge/26011606.jpg" },
         ],
-        open_time: "13:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "sofia-toronto",
-        location_id: torontoLocationId,
-        cuisine_id: italianCuisineId,
       },
-      {
-        name: "Terroni Sud Forno",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/49463645.png",
-        price: PRICE.REGULAR,
-        description:
-          "Spaccio West, near the Lower Junction on the West Toronto Railpath, acts as the backstage to the main show taking place at all Terroni locations.",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48741813.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48741816.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48741821.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48741826.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/48741827.jpg",
+      open_time: "13:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "sofia-toronto",
+      location_id: torontoLocationId,
+      cuisine_id: italianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "Terroni Sud Forno",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/49463645.png",
+      price: PRICE.REGULAR,
+      description:
+        "Spaccio West, near the Lower Junction on the West Toronto Railpath, acts as the backstage to the main show taking place at all Terroni locations.",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48741813.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48741816.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48741821.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48741826.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/48741827.jpg",
+          },
         ],
-        open_time: "10:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "terroni-sud-forno-produzione-e-spaccio-toronto",
-        location_id: torontoLocationId,
-        cuisine_id: italianCuisineId,
       },
-      {
-        name: "il Padrino",
-        main_image:
-          "https://resizer.otstatic.com/v2/photos/wide-huge/3/49616181.jpg",
-        price: PRICE.CHEAP,
-        description:
-          "Welcome to the newest edition to College street iL PADRINO Ristorante has joined the list of Italian restaurants where Chef Connie award winning Italian Chef makes every Italian dish with love like no other. ",
-        images: [
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/49494556.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/49494562.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/2/49494563.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/3/49494887.jpg",
-          "https://resizer.otstatic.com/v2/photos/xlarge/3/49533502.jpg",
+      open_time: "10:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "terroni-sud-forno-produzione-e-spaccio-toronto",
+      location_id: torontoLocationId,
+      cuisine_id: italianCuisineId,
+    },
+  });
+  await prisma.restaurant.create({
+    data: {
+      name: "il Padrino",
+      main_image:
+        "https://resizer.otstatic.com/v2/photos/wide-huge/3/49616181.jpg",
+      price: PRICE.CHEAP,
+      description:
+        "Welcome to the newest edition to College street iL PADRINO Ristorante has joined the list of Italian restaurants where Chef Connie award winning Italian Chef makes every Italian dish with love like no other. ",
+      images: {
+        create: [
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/49494556.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/49494562.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/2/49494563.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/3/49494887.jpg",
+          },
+          {
+            url: "https://resizer.otstatic.com/v2/photos/xlarge/3/49533502.jpg",
+          },
         ],
-        open_time: "07:00:00.000Z",
-        close_time: "21:00:00.000Z",
-        slug: "il-padrino-toronto",
-        location_id: torontoLocationId,
-        cuisine_id: italianCuisineId,
       },
-    ],
+      open_time: "07:00:00.000Z",
+      close_time: "21:00:00.000Z",
+      slug: "il-padrino-toronto",
+      location_id: torontoLocationId,
+      cuisine_id: italianCuisineId,
+    },
   });
 
   const restaurants = await prisma.restaurant.findMany();

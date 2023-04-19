@@ -1,4 +1,4 @@
-import { PrismaClient, Review } from "@prisma/client";
+import { PrismaClient, Review, Image } from "@prisma/client";
 import { notFound } from "next/navigation";
 import Description from "./components/Description";
 import Images from "./components/Images";
@@ -13,7 +13,7 @@ const prisma = new PrismaClient();
 interface Restaurant {
   id: number;
   name: string;
-  images: string[];
+  images: Image[];
   description: string;
   open_time: string;
   close_time: string;
@@ -48,7 +48,7 @@ const fetchRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
 export default async function RestaurantDetails({
   params,
 }: {
-  params: { slug: string; };
+  params: { slug: string };
 }) {
   const restaurant = await fetchRestaurantBySlug(params.slug);
 

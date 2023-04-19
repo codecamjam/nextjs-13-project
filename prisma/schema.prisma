@@ -6,16 +6,24 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+// Define the "Image" model to store the images
+model Image {
+  id           Int        @id @default(autoincrement())
+  url          String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
 }
 
 model Restaurant {
   id          Int      @id @default(autoincrement())
   name        String
   main_image  String
-  images      String[]
-  description String
+  images      Image[] // Add a one-to-many relation to the "Image" model
+  description String   @db.VarChar(500)
   open_time   String
   close_time  String
   slug        String   @unique
